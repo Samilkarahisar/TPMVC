@@ -11,6 +11,7 @@ package tpmvc;
  */
 public class Entity {
     private int x;
+    private int TEST;
     private int y;
     Dir currentDir; 
     Grille grid;

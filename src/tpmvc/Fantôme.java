@@ -12,8 +12,7 @@ public class Fantôme extends Entity{
         this.currentDir=Dir.droite;
     }
 
-    int tristantisbogoss;
-
+    int tristantisbogossno;
     public void DepAlea(){
         Boolean change=false;
         ArrayList<Dir> dispo=new ArrayList<Dir>();

@@ -49,6 +49,7 @@ public class Jeu extends Observable implements Runnable{
             getGrille().getNewE(2,2);
             Fantôme ghost1 = new Fantôme(3,3, getGrille());
             getGrille().GetListE().add(ghost1);
+            System.out.println(getGrille().getEntity(0).getX()+" "+getGrille().getEntity(0).getY());
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -56,13 +57,21 @@ public class Jeu extends Observable implements Runnable{
         while(true){
             System.out.println(getGrille().getNbEntity());
             Entity ent = getGrille().getEntity(0); //pacman
-
+            
             setChanged();
             notifyObservers();
             try{
                 Thread.sleep(750);
                 if(ent.currentDir!=null){
                 ent.depl(ent.currentDir);
+                }
+                for(int i=1;i<getGrille().GetListE().size();i++){
+                    System.out.println("ALLO ?!?");
+                    Entity Ghost=getGrille().getEntity(i);
+                   
+                        Ghost.DepAlea();
+                        Ghost.depl(Ghost.currentDir);
+                    
                 }
             }
             catch(InterruptedException e){

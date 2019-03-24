@@ -35,8 +35,8 @@ import javafx.scene.text.TextAlignment;
 public class Graphique extends Application{
     //modèle ( le jeu qui s'execute)
 
-    public final int SIZE_X =10;
-    public final int SIZE_Y = 10;
+    public final int SIZE_X =21;
+    public final int SIZE_Y = 21;
     
  Jeu game;
  int column=0;
@@ -85,16 +85,18 @@ public class Graphique extends Application{
                          //dans le cas de pacman k vaut 0
                          if (game.getGrille().getEntity(0).getX() == i && game.getGrille().getEntity(0).getY() == j) { // spm est à la position i, j => le dessiner
                           
-                            tab[i][j].setImage(imPM);
+                            
+                             tab[i][j].setImage(imPM);
                             
                         } else{
                              if (game.getGrille().getEntity(1).getX() == i && game.getGrille().getEntity(1).getY() == j) { // spm est à la position i, j => le dessiner
 
+                                 System.out.println(i+" "+j);
                                  tab[i][j].setImage(imMur);
 
                              }
 
-                            if(game.getGrille().getGrille()[i][j]){
+                             else if(game.getGrille().getGrille()[i][j]){
                             tab[i][j].setImage(imVide);
 
                             }

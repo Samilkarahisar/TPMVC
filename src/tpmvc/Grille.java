@@ -7,20 +7,42 @@ package tpmvc;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author martin
- */
+
 public class Grille {
     private Boolean grille[][];
-    private final int WIDTH = 10;
-    private final int LENGHT = 10;
+    private final int WIDTH = 21;
+    private final int LENGHT = 21;
     private ArrayList<Entity> list;
     private int nbEntity;
+    
+     Boolean grilleBase[][]={
+         {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
+         {false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false},
+         {false,true,true,true,true,true,false,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
+         {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,true,true,true,false,true,false},
+         {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,false,false,true,false,true,false},
+         {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,true,false},
+         {false,true,false,true,false,false,false,false,false,true,false,false,false,true,false,true,false,false,false,true,false},
+         {false,true,false,true,true,true,false,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
+         {false,true,false,true,false,true,false,true,false,false,false,true,false,true,false,true,false,true,false,true,false},
+         {false,true,true,true,false,true,true,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
+         {false,false,false,true,false,false,false,true,true,true,false,true,false,false,false,true,false,false,false,true,false},
+         {false,true,true,true,false,true,true,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
+         {false,true,false,true,false,true,false,true,false,false,false,true,false,true,false,true,false,true,false,true,false},
+         {false,true,false,true,true,true,false,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
+         {false,true,false,true,false,false,false,false,false,true,false,false,false,true,false,true,false,false,false,true,false},
+         {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,true,false},
+         {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,false,false,true,false,true,false},
+         {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,true,true,true,false,true,false},
+         {false,true,true,true,true,true,false,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
+         {false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false},
+         {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false}
+     };
     
     public Grille(){
         list = new ArrayList();
         nbEntity = 0;
+        grille=this.grilleBase;
     }
     
     public Grille(Boolean[][] b){

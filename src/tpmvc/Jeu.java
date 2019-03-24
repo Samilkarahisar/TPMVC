@@ -8,17 +8,14 @@ package tpmvc;
 import static java.lang.Thread.*;
 import java.util.Observable;
 
-/**
- *
- * @author martin
- */
+
 public class Jeu extends Observable implements Runnable{
     private Grille grille;
     private final int WIDTH = 10;
     private final int LENGHT = 10;
     
     public Jeu(){
-        grille = new Grille(new Boolean[LENGHT][WIDTH]);
+        grille = new Grille();
 
     }
 

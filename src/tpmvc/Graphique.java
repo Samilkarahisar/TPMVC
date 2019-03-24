@@ -80,30 +80,30 @@ public class Graphique extends Application{
                     for (int j = 0; j < SIZE_Y; j++) {
                         
                         try{
-                         for(int k = 0; k<game.getGrille().getNbEntity(); k++){
-                    //System.out.println(game.getGrille().getEntity(0).getX() + " " + game.getGrille().getEntity(0).getY());
-                         //dans le cas de pacman k vaut 0
-                         if (game.getGrille().getEntity(0).getX() == i && game.getGrille().getEntity(0).getY() == j) { // spm est à la position i, j => le dessiner
-                          
-                            
-                             tab[i][j].setImage(imPM);
-                            
-                        } else{
-                             if (game.getGrille().getEntity(1).getX() == i && game.getGrille().getEntity(1).getY() == j) { // spm est à la position i, j => le dessiner
-
-                                 System.out.println(i+" "+j);
-                                 tab[i][j].setImage(imMur);
-
-                             }
-
-                             else if(game.getGrille().getGrille()[i][j]){
-                            tab[i][j].setImage(imVide);
+                            if(game.getGrille().getGrille()[i][j]){
+                                tab[i][j].setImage(imVide);
 
                             }
                             else{
                                  tab[i][j].setImage(imMur);
+                            } 
+                            if (game.getGrille().getEntity(0).getX() == i && game.getGrille().getEntity(0).getY() == j) { // spm est à la position i, j => le dessiner
+                          
+                            
+                             tab[i][j].setImage(imPM);
+                            
                             }
-                        }
+                             for(int k = 0; k<game.getGrille().GetListE().size(); k++){
+                    //System.out.println(game.getGrille().getEntity(0).getX() + " " + game.getGrille().getEntity(0).getY());
+                         //dans le cas de pacman k vaut 0
+                         
+                             if (game.getGrille().getEntity(k).getX() == i && game.getGrille().getEntity(k).getY() == j) { // spm est à la position i, j => le dessiner
+
+                                 System.out.println("IMAGE"+k);
+                                 tab[i][j].setImage(imPM);
+
+                             }
+
                          
                          }
                             

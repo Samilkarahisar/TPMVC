@@ -43,10 +43,12 @@ public class Jeu extends Observable implements Runnable{
     @Override
     public void run(){
         try{
-            getGrille().getNewE(2,2);
-            Fantôme ghost1 = new Fantôme(3,3, getGrille());
+            getGrille().getNewE(7,7);
+            Fantôme ghost1 = new Fantôme(9,9, getGrille());
+            Fantôme ghost2 = new Fantôme(11,7, getGrille());
             getGrille().GetListE().add(ghost1);
-            System.out.println(getGrille().getEntity(0).getX()+" "+getGrille().getEntity(0).getY());
+            getGrille().GetListE().add(ghost2);
+            System.out.println(ghost2.getX()+" "+ghost2.getY()+"       "+getGrille().GetListE().size());
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -63,12 +65,10 @@ public class Jeu extends Observable implements Runnable{
                 ent.depl(ent.currentDir);
                 }
                 for(int i=1;i<getGrille().GetListE().size();i++){
-                    System.out.println("ALLO ?!?");
+                    System.out.println("Fantôme num: "+i);
                     Entity Ghost=getGrille().getEntity(i);
-                   
                         Ghost.DepAlea();
                         Ghost.depl(Ghost.currentDir);
-                    
                 }
             }
             catch(InterruptedException e){

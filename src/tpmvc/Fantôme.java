@@ -5,8 +5,6 @@ import java.util.Random;
 
 public class Fantôme extends Entity{
 
-    int x;
-    int y;
     public Fantôme(int _x, int _y, Grille g){
         this.x=_x;
         this.y=_y;
@@ -16,7 +14,7 @@ public class Fantôme extends Entity{
 
     int tristantisbogossno;
     @Override
-    public void DepAlea(){System.out.println("Fantôme: "+this.getX()+" "+this.getY());
+    public void DepAlea(){
         Boolean change=false;
         ArrayList<Dir> dispo=new ArrayList<>();
         switch(this.currentDir) {
@@ -36,10 +34,9 @@ public class Fantôme extends Entity{
                 }
                 break;
             case gauche:
-                if (this.getX()==0){
-                    if(!grid.getGrille()[this.getX() - 1][this.getY()]) {
+                if (this.getX()==0||!grid.getGrille()[this.getX() - 1][this.getY()]) {
                     change = true;
-                    }
+                    
                 }
                 break;
             default:
@@ -58,15 +55,12 @@ public class Fantôme extends Entity{
             if(!(this.getX()==grid.getLENGHT()-1)&&grid.getGrille()[this.getX()-1][this.getY() ]){
                 dispo.add(Dir.gauche);
             }
-            System.out.println(dispo.toString());
-            int lim=dispo.size();
-            System.out.println("Limite: "+dispo.size());
+            int lim=dispo.size();      
             int Max=lim-1;
             int Min=0;
             int  nombreAleatoire = Min + (int)(Math.random()) * ((Max-Min)+1);
             Random rand = new Random();
              nombreAleatoire = rand.nextInt(Max - Min + 1) + Min;
-            System.out.println("Direction numéro: "+nombreAleatoire);
             this.currentDir=dispo.get(nombreAleatoire);
 
 

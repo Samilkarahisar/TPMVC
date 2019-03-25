@@ -54,9 +54,7 @@ public class Graphique extends Application{
     Image imVide = new Image("Vide.png");
     Image imMur = new Image("mur.png");
 
-     Image imGhost = new Image("ghost.png");
-
-     Image imYem = new Image("superGomme.png");
+        
     
     ImageView[][] tab = new ImageView[SIZE_X][SIZE_Y];
    
@@ -83,13 +81,8 @@ public class Graphique extends Application{
                         
                         try{
                             if(game.getGrille().getGrille()[i][j]){
+                                tab[i][j].setImage(imVide);
 
-                                if(game.getPoints()[i][j]){
-                                    tab[i][j].setImage(imYem);
-                                }
-                                else {
-                                    tab[i][j].setImage(imVide);
-                                }
                             }
                             else{
                                  tab[i][j].setImage(imMur);
@@ -100,14 +93,14 @@ public class Graphique extends Application{
                              tab[i][j].setImage(imPM);
                             
                             }
-                             for(int k = 1; k<game.getGrille().GetListE().size(); k++){
+                             for(int k = 0; k<game.getGrille().GetListE().size(); k++){
                     //System.out.println(game.getGrille().getEntity(0).getX() + " " + game.getGrille().getEntity(0).getY());
                          //dans le cas de pacman k vaut 0
                          
                              if (game.getGrille().getEntity(k).getX() == i && game.getGrille().getEntity(k).getY() == j) { // spm est à la position i, j => le dessiner
 
                                  System.out.println("IMAGE"+k);
-                                 tab[i][j].setImage(imGhost);
+                                 tab[i][j].setImage(imPM);
 
                              }
 

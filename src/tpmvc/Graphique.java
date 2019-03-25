@@ -78,7 +78,7 @@ public class Graphique extends Application{
             public void update(Observable o, Object arg) {
                 for (int i = 0; i < SIZE_X; i++) { // rafraichissement graphique
                     for (int j = 0; j < SIZE_Y; j++) {
-                        
+                        System.out.println("AAAAAAAAAAAAAAA");
                         try{
                             if(game.getGrille().getGrille()[i][j]){
                                 tab[i][j].setImage(imVide);

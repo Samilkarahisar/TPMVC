@@ -93,12 +93,14 @@ public class Graphique extends Application{
                              tab[i][j].setImage(imPM);
                             
                             }
-                             for(int k = 1; k<game.getGrille().GetListE().size(); k++){
+                             for(int k = 0; k<game.getGrille().GetListE().size(); k++){
                     //System.out.println(game.getGrille().getEntity(0).getX() + " " + game.getGrille().getEntity(0).getY());
                          //dans le cas de pacman k vaut 0
                          
                              if (game.getGrille().getEntity(k).getX() == i && game.getGrille().getEntity(k).getY() == j) { // spm est à la position i, j => le dessiner
-                                 tab[i][j].setImage(imMur);
+
+                                 System.out.println("IMAGE"+k);
+                                 tab[i][j].setImage(imPM);
 
                              }
 
@@ -149,10 +151,8 @@ public class Graphique extends Application{
                         pacMan.SetCurrentDir(Dir.gauche);
                     break;
                     case ENTER:
-                        if(!game.restart){
                         game.restart=true;
                         System.out.println("JEU DE SES MORTS");
-                        }
                     break;
                     default:
                     break;

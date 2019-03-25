@@ -38,6 +38,8 @@ public class Grille {
          {false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false},
          {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false}
      };
+
+
     
     public Grille(){
         list = new ArrayList();

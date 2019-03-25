@@ -13,10 +13,14 @@ public class Jeu extends Observable implements Runnable{
     private Grille grille;
     private final int WIDTH = 10;
     private final int LENGHT = 10;
+    private int pointcompteur=0;
     public boolean restart;
+
+    private Boolean GrillePoints[][];
+
     public Jeu(){
         grille = new Grille();
-
+        GrillePoints = grille.grilleBase;
     }
 
 
@@ -36,6 +40,8 @@ public class Jeu extends Observable implements Runnable{
     public void start(){
     new Thread(this).start();
     }
+
+    public Boolean[][] getPoints(){return GrillePoints;}
 
     public Grille getGrille() {
         return grille;

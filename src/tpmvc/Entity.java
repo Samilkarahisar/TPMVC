@@ -7,14 +7,11 @@ package tpmvc;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author martin
- */
+
 public class Entity {
-    private int x;
+    public int x;
     private int TEST;
-    private int y;
+    public int y;
     Dir currentDir; 
     Grille grid;
 

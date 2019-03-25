@@ -13,14 +13,24 @@ public class Jeu extends Observable implements Runnable{
     private Grille grille;
     private final int WIDTH = 10;
     private final int LENGHT = 10;
-    
+    public boolean restart;
     public Jeu(){
         grille = new Grille();
 
     }
 
 
-
+    public boolean CheckMort(Entity ent){
+        boolean res=false;
+        for(int i=1;i<getGrille().GetListE().size();i++){
+            Entity current=getGrille().getEntity(i);
+            if(current.getX()==ent.getX()&&current.getY()==ent.getY()){
+                res=true;
+            }
+        }
+        
+        return res;
+    } 
 
     public void start(){
     new Thread(this).start();
@@ -42,11 +52,15 @@ public class Jeu extends Observable implements Runnable{
     
     @Override
     public void run(){
+        boolean end;
+        boolean restart=false;
         try{
-            getGrille().getNewE(2,2);
-            Fantôme ghost1 = new Fantôme(3,3, getGrille());
+            getGrille().getNewE(7,7);
+            Fantôme ghost1 = new Fantôme(9,9, getGrille());
+            Fantôme ghost2 = new Fantôme(11,7, getGrille());
             getGrille().GetListE().add(ghost1);
-            System.out.println(getGrille().getEntity(0).getX()+" "+getGrille().getEntity(0).getY());
+            getGrille().GetListE().add(ghost2);
+            System.out.println(ghost2.getX()+" "+ghost2.getY()+"       "+getGrille().GetListE().size());
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -63,12 +77,18 @@ public class Jeu extends Observable implements Runnable{
                 ent.depl(ent.currentDir);
                 }
                 for(int i=1;i<getGrille().GetListE().size();i++){
-                    System.out.println("ALLO ?!?");
+                    System.out.println("Fantôme num: "+i);
                     Entity Ghost=getGrille().getEntity(i);
-                   
                         Ghost.DepAlea();
                         Ghost.depl(Ghost.currentDir);
-                    
+                }
+                if (CheckMort(ent)){
+                    System.out.println("MORT ! MORT ! MORT ! IDIOT");
+                    while(!this.restart){
+                        Thread.sleep(100);
+                    }
+                    ent.x=3;
+                    ent.y=3;               
                 }
             }
             catch(InterruptedException e){

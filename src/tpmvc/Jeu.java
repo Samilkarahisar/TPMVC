@@ -13,14 +13,24 @@ public class Jeu extends Observable implements Runnable{
     private Grille grille;
     private final int WIDTH = 10;
     private final int LENGHT = 10;
-    
+    public boolean restart;
     public Jeu(){
         grille = new Grille();
 
     }
 
 
-
+    public boolean CheckMort(Entity ent){
+        boolean res=false;
+        for(int i=1;i<getGrille().GetListE().size();i++){
+            Entity current=getGrille().getEntity(i);
+            if(current.getX()==ent.getX()&&current.getY()==ent.getY()){
+                res=true;
+            }
+        }
+        
+        return res;
+    } 
 
     public void start(){
     new Thread(this).start();
@@ -42,6 +52,8 @@ public class Jeu extends Observable implements Runnable{
     
     @Override
     public void run(){
+        boolean end;
+        boolean restart=false;
         try{
             getGrille().getNewE(7,7);
             Fantôme ghost1 = new Fantôme(9,9, getGrille());
@@ -69,6 +81,14 @@ public class Jeu extends Observable implements Runnable{
                     Entity Ghost=getGrille().getEntity(i);
                         Ghost.DepAlea();
                         Ghost.depl(Ghost.currentDir);
+                }
+                if (CheckMort(ent)){
+                    System.out.println("MORT ! MORT ! MORT ! IDIOT");
+                    while(!this.restart){
+                        Thread.sleep(100);
+                    }
+                    ent.x=3;
+                    ent.y=3;               
                 }
             }
             catch(InterruptedException e){

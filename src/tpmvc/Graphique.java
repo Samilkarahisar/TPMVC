@@ -150,6 +150,10 @@ public class Graphique extends Application{
                     case LEFT:
                         pacMan.SetCurrentDir(Dir.gauche);
                     break;
+                    case ENTER:
+                        game.restart=true;
+                        System.out.println("JEU DE SES MORTS");
+                    break;
                     default:
                     break;
                 }

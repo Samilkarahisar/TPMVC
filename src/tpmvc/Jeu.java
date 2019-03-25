@@ -16,11 +16,33 @@ public class Jeu extends Observable implements Runnable{
     private int pointcompteur=0;
     public boolean restart;
 
-    private Boolean GrillePoints[][];
+    Boolean GrillePoints[][]={
+            {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
+            {false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false},
+            {false,true,true,true,true,true,false,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
+            {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,true,true,true,false,true,false},
+            {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,false,false,true,false,true,false},
+            {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,true,false},
+            {false,true,false,true,false,false,false,false,false,true,false,false,false,true,false,true,false,false,false,true,false},
+            {false,true,false,true,true,true,false,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
+            {false,true,false,true,false,true,false,true,false,false,false,true,false,true,false,true,false,true,false,true,false},
+            {false,true,true,true,false,true,true,true,true,true,false,true,false,true,true,true,false,true,true,true,false},
+            {false,false,false,true,false,false,false,true,true,true,false,true,false,false,false,true,false,false,false,true,false},
+            {false,true,true,true,false,true,true,true,true,true,false,true,false,true,true,true,false,true,true,true,false},
+            {false,true,false,true,false,true,false,true,false,false,false,true,false,true,false,true,false,true,false,true,false},
+            {false,true,false,true,true,true,false,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
+            {false,true,false,true,false,false,false,false,false,true,false,false,false,true,false,true,false,false,false,true,false},
+            {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,true,false},
+            {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,false,false,true,false,true,false},
+            {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,true,true,true,false,true,false},
+            {false,true,true,true,true,true,false,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
+            {false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false},
+            {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false}
+    };
+
 
     public Jeu(){
         grille = new Grille();
-        GrillePoints = grille.grilleBase;
     }
 
 
@@ -35,7 +57,17 @@ public class Jeu extends Observable implements Runnable{
         }
         
         return res;
-    } 
+    }
+
+    public void CheckPoint(Entity ent){
+
+        if(GrillePoints[ent.getX()][ent.getY()]){
+            pointcompteur+=1;
+            GrillePoints[ent.getX()][ent.getY()]=false;
+        }
+
+    }
+
 
     public void start(){
     new Thread(this).start();
@@ -92,10 +124,12 @@ public class Jeu extends Observable implements Runnable{
                 if(ent.currentDir!=null){
                 ent.depl(ent.currentDir);
                 }
+
+                CheckPoint(ent);
                 Thread.sleep(5);
                 setChanged();
                 notifyObservers();
-                System.out.println("AAAAAAAAAAAAA");
+                System.out.println("Votre score: " + pointcompteur);
                 if (CheckMort(ent)){
                     System.out.println("MORT ! MORT ! MORT ! IDIOT");
                     while(!this.restart){

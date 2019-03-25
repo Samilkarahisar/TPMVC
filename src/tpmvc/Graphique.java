@@ -81,7 +81,6 @@ public class Graphique extends Application{
             public void update(Observable o, Object arg) {
                 for (int i = 0; i < SIZE_X; i++) { // rafraichissement graphique
                     for (int j = 0; j < SIZE_Y; j++) {
-                        System.out.println("AAAAAAAAAAAAAAA");
                         try{
                             if(game.getGrille().getGrille()[i][j]){
                                 if(game.getPoints()[i][j]){
@@ -106,7 +105,6 @@ public class Graphique extends Application{
                          
                              if (game.getGrille().getEntity(k).getX() == i && game.getGrille().getEntity(k).getY() == j) { // spm est à la position i, j => le dessiner
 
-                                 System.out.println("IMAGE"+k);
                                  tab[i][j].setImage(imGhost);
 
                              }
@@ -116,7 +114,7 @@ public class Graphique extends Application{
                             
                            
                         }catch(IndexOutOfBoundsException exception){
-                        System.out.println("c ca le probleme");
+                        System.out.println("Probleme de taille de tableau?");
                         }
                        
                         

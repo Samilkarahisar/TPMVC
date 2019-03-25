@@ -26,6 +26,7 @@ public class Jeu extends Observable implements Runnable{
             Entity current=getGrille().getEntity(i);
             if(current.getX()==ent.getX()&&current.getY()==ent.getY()){
                 res=true;
+                System.out.println("Le Fantôme "+i+"  vous a dévoré !!");
             }
         }
         
@@ -72,9 +73,30 @@ public class Jeu extends Observable implements Runnable{
             setChanged();
             notifyObservers();
             try{
+                if (CheckMort(ent)){
+                    System.out.println("MORT ! MORT ! MORT ! IDIOT");
+                    while(!this.restart){
+                        Thread.sleep(100);
+                    }
+                    ent.x=3;
+                    ent.y=3;
+                    this.restart=false;
+                }
                 Thread.sleep(750);
                 if(ent.currentDir!=null){
                 ent.depl(ent.currentDir);
+                }
+                Thread.sleep(5);
+                setChanged();
+                notifyObservers();
+                if (CheckMort(ent)){
+                    System.out.println("MORT ! MORT ! MORT ! IDIOT");
+                    while(!this.restart){
+                        Thread.sleep(100);
+                    }
+                    ent.x=3;
+                    ent.y=3;
+                    this.restart=false;
                 }
                 for(int i=1;i<getGrille().GetListE().size();i++){
                     System.out.println("Fantôme num: "+i);
@@ -82,14 +104,7 @@ public class Jeu extends Observable implements Runnable{
                         Ghost.DepAlea();
                         Ghost.depl(Ghost.currentDir);
                 }
-                if (CheckMort(ent)){
-                    System.out.println("MORT ! MORT ! MORT ! IDIOT");
-                    while(!this.restart){
-                        Thread.sleep(100);
-                    }
-                    ent.x=3;
-                    ent.y=3;               
-                }
+                
             }
             catch(InterruptedException e){
                 System.out.println(e.getMessage());            

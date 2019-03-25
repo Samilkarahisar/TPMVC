@@ -89,6 +89,7 @@ public class Jeu extends Observable implements Runnable{
                 Thread.sleep(5);
                 setChanged();
                 notifyObservers();
+                System.out.println("AAAAAAAAAAAAA");
                 if (CheckMort(ent)){
                     System.out.println("MORT ! MORT ! MORT ! IDIOT");
                     while(!this.restart){

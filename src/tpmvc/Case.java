@@ -5,10 +5,7 @@
  */
 package tpmvc;
 
-/**
- *
- * @author martin
- */
+
 public class Case {
     private boolean crossable;
     String type;

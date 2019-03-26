@@ -8,10 +8,7 @@ package tpmvc;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- *
- * @author martin
- */
+
 public class Console implements Observer{
     private Jeu game;
     

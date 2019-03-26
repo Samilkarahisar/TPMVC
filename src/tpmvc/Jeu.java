@@ -252,7 +252,7 @@ public class Jeu extends Observable implements Runnable{
                 for(int i=1;i<getGrille().GetListE().size();i++){
                     System.out.println("Fantôme num: "+i);
                     Entity Ghost=getGrille().getEntity(i);
-                        Ghost.DepAlea();
+                        Ghost.DepAlea(ent.getX(),ent.getY());
                         Ghost.depl(Ghost.currentDir);
                 }
                 

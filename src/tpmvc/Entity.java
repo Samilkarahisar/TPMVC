@@ -81,7 +81,7 @@ public class Entity {
         }
         return false;
     }
-    public void DepAlea(){
+    public void DepAlea(int x,int y){
         Boolean change=false;
         ArrayList<Dir> dispo=new ArrayList<Dir>();
         switch(this.currentDir) {

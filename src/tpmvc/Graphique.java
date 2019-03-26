@@ -48,7 +48,11 @@ public class Graphique extends Application{
     BorderPane border = new BorderPane();
     GridPane gPane = new GridPane();
  
-    Image imPM = new Image("pacman.png"); // préparation des images
+    Image imPM_g = new Image("pacman_g.png"); // préparation des images
+     Image imPM_d = new Image("pacman_d.png");
+     Image imPM_h = new Image("pacman_h.png");
+     Image imPM_b = new Image("pacman_b.png");
+
     Image imVide = new Image("Vide.png");
     Image imMur = new Image("mur.png");
     Image imBonus=new Image("Bonus.png");
@@ -76,8 +80,9 @@ public class Graphique extends Application{
      t_win.setText("Vous avez Gagné ! Appuyer sur Entree, pour recommencer.");
 
     ImageView[][] tab = new ImageView[SIZE_X][SIZE_Y];
-   
-   
+
+
+
         for (int i = 0; i < SIZE_X; i++) { // initialisation de la grille (sans image)
             for (int j = 0; j < SIZE_Y; j++) {
                 ImageView img = new ImageView();
@@ -133,26 +138,26 @@ public class Graphique extends Application{
                             } 
                             if (game.getGrille().getEntity(0).getX() == i && game.getGrille().getEntity(0).getY() == j) { // spm est à la position i, j => le dessiner
                                 Dir orientation=game.getGrille().getEntity(0).currentDir;
-                                switch (orientation){
-                                        case droite:
-                                            tab[i][j].setImage(imPM);
-                                        break;
-                                        
-                                        case gauche:
-                                            tab[i][j].setImage(imPM);
-                                        break;
-                                        
-                                        case bas:
-                                        tab[i][j].setImage(imPM);
-                                        break;
-                                        
-                                        case haut:
-                                            tab[i][j].setImage(imPM);
-                                        break;
-            
+
+                                tab[i][j].setImage(imPM_d);
+
+                                if(orientation==Dir.gauche){
+
+                                    tab[i][j].setImage(imPM_g);
                                 }
-                             tab[i][j].setImage(imPM);
-                            
+                                else if(orientation==Dir.droite){
+
+                                    tab[i][j].setImage(imPM_d);
+                                }
+                                else if(orientation==Dir.haut){
+
+                                    tab[i][j].setImage(imPM_h);
+                                }
+                                else if(orientation==Dir.bas){
+
+                                    tab[i][j].setImage(imPM_b);
+                                }
+
                             }
                              for(int k = 1; k<game.getGrille().GetListE().size(); k++){
                     //System.out.println(game.getGrille().getEntity(0).getX() + " " + game.getGrille().getEntity(0).getY());
@@ -169,7 +174,7 @@ public class Graphique extends Application{
 
                          
                          }
-                            
+
                            
                         }catch(IndexOutOfBoundsException exception){
                         System.out.println("Probleme de taille de tableau?");
@@ -202,7 +207,7 @@ public class Graphique extends Application{
     primaryStage.setTitle("PACMAN");
     primaryStage.setScene(scene);
     primaryStage.show();
-    
+
   
          root.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() { // on écoute le clavier
             @Override

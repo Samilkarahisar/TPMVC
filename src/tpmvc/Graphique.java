@@ -132,8 +132,25 @@ public class Graphique extends Application{
                                  tab[i][j].setImage(imMur);
                             } 
                             if (game.getGrille().getEntity(0).getX() == i && game.getGrille().getEntity(0).getY() == j) { // spm est à la position i, j => le dessiner
-                          
-                            
+                                Dir orientation=game.getGrille().getEntity(0).currentDir;
+                                switch (orientation){
+                                        case droite:
+                                            tab[i][j].setImage(imPM);
+                                        break;
+                                        
+                                        case gauche:
+                                            tab[i][j].setImage(imPM);
+                                        break;
+                                        
+                                        case bas:
+                                        tab[i][j].setImage(imPM);
+                                        break;
+                                        
+                                        case haut:
+                                            tab[i][j].setImage(imPM);
+                                        break;
+            
+                                }
                              tab[i][j].setImage(imPM);
                             
                             }

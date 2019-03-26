@@ -58,7 +58,7 @@ public class Jeu extends Observable implements Runnable{
         ListBonus.add(gomme2);
         SuperGomme gomme3= new SuperGomme(3,18);
         ListBonus.add(gomme3);
-        SuperGomme gomme4= new SuperGomme(18,3);
+        SuperGomme gomme4= new SuperGomme(19,3);
         ListBonus.add(gomme4);
     }
     

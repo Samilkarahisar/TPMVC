@@ -96,6 +96,7 @@ public class Fantôme extends Entity{
                         }
                         else{
                             this.currentDir=Dir.droite;
+
                         }
 
                     } else if(actualx<x){

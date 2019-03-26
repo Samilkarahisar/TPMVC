@@ -15,6 +15,7 @@ public class TPMVC {
     public static void main(String[] args){
         Jeu j = new Jeu();
         new Thread(j).start();
+
     }
     
 }

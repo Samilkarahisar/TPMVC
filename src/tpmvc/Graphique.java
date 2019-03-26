@@ -68,7 +68,9 @@ public class Graphique extends Application{
      t_gameover.setFont(Font.font ("Verdana", 30));
      t_gameover.setFill(Color.WHITE);
 
-    
+
+     t_gameover.setText("Game over. Appuyer sur Entree, pour recommencer.");
+
     ImageView[][] tab = new ImageView[SIZE_X][SIZE_Y];
    
    
@@ -89,9 +91,11 @@ public class Graphique extends Application{
         Observer o =  new Observer() { // l'observer observe l'obervable (update est exécuté dès notifyObservers() est appelé côté modèle )
             @Override
             public void update(Observable o, Object arg) {
-                if(game.gameover==true){
-                t_gameover.setText("Game over. Appuyer sur Entree, pour recommencer.");
-
+                if(game.gameover){
+                    t_gameover.setVisible(true);
+                }
+                else{
+                    t_gameover.setVisible(false);
                 }
                 t.setText("Score:" + game.getPointcompteur());
 

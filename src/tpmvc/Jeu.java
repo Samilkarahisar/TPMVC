@@ -15,9 +15,10 @@ public class Jeu extends Observable implements Runnable{
     private final int LENGHT = 10;
     private int pointcompteur=0;
     public boolean restart;
-    public boolean gameover;
+    public boolean gameover=false;
 
-    Boolean GrillePoints[][]={
+
+     private static final Boolean Map[][]={
             {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
             {false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false},
             {false,true,true,true,true,true,false,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
@@ -41,9 +42,11 @@ public class Jeu extends Observable implements Runnable{
             {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false}
     };
 
+    private Boolean GrillePoints[][];
 
     public Jeu(){
         grille = new Grille();
+        GrillePoints=Map.clone();
     }
 
 
@@ -53,7 +56,6 @@ public class Jeu extends Observable implements Runnable{
             Entity current=getGrille().getEntity(i);
             if(current.getX()==ent.getX()&&current.getY()==ent.getY()){
                 res=true;
-                gameover=true;
                 System.out.println("Le Fantôme "+i+"  vous a dévoré !!");
             }
         }
@@ -82,8 +84,18 @@ public class Jeu extends Observable implements Runnable{
     public int getPointcompteur(){
         return pointcompteur;
     }
+    public boolean getGameover(Entity ent){
+        return CheckMort(ent);
+    }
     public void resetPointcompteur(){
         pointcompteur=0;
+
+        for (int k=0;k<21;k++) {
+            for (int i=0; i < 21; i++) {
+                GrillePoints[k][i]=true;
+            }
+        }
+
     }
 
     public int getWIDTH() {
@@ -100,7 +112,6 @@ public class Jeu extends Observable implements Runnable{
     public void run(){
         boolean end;
         boolean restart=false;
-
         try{
             getGrille().getNewE(7,7);
             Fantôme ghost1 = new Fantôme(9,9, getGrille());
@@ -126,21 +137,20 @@ public class Jeu extends Observable implements Runnable{
 
 
                     while(!this.restart){
-
                         Thread.sleep(100);
                     }
                     ent.x=3;
                     ent.y=3;
                     this.restart=false;
                 }
-                Thread.sleep(750);
+                Thread.sleep(400);
                 if(ent.currentDir!=null){
                 ent.depl(ent.currentDir);
                 }
 
                 CheckPoint(ent);
-
-                Thread.sleep(5);
+                this.gameover= getGameover(ent);
+                        Thread.sleep(5);
                 setChanged();
                 notifyObservers();
                 System.out.println("Votre score: " + pointcompteur);
@@ -148,6 +158,7 @@ public class Jeu extends Observable implements Runnable{
                     System.out.println("MORT ! MORT ! MORT ! IDIOT");
 
                     while(!this.restart){
+
                         Thread.sleep(100);
                     }
                     ent.x=3;

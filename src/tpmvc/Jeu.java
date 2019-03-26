@@ -56,9 +56,9 @@ public class Jeu extends Observable implements Runnable{
         ListBonus.add(gomme1);
         SuperGomme gomme2= new SuperGomme(18,18);
         ListBonus.add(gomme2);
-        SuperGomme gomme3= new SuperGomme(3,18);
+        SuperGomme gomme3= new SuperGomme(4,19);
         ListBonus.add(gomme3);
-        SuperGomme gomme4= new SuperGomme(19,3);
+        SuperGomme gomme4= new SuperGomme(18,3);
         ListBonus.add(gomme4);
     }
     
@@ -174,13 +174,11 @@ public class Jeu extends Observable implements Runnable{
             Fantôme ghost2 = new Fantôme(12,9, getGrille());
             getGrille().GetListE().add(ghost1);
             getGrille().GetListE().add(ghost2);
-            System.out.println(ghost2.getX()+" "+ghost2.getY()+"       "+getGrille().GetListE().size());
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
         while(true){
-            System.out.println(getGrille().getNbEntity());
             Entity ent = getGrille().getEntity(0); //pacman
             
             setChanged();
@@ -202,8 +200,6 @@ public class Jeu extends Observable implements Runnable{
                     SuperMode--;
                 }
                 else    if (CheckMort(ent)){
-                    System.out.println("MORT ! MORT ! MORT ! IDIOT");
-
                     this.gameover= true;
                     setChanged();
                     notifyObservers();
@@ -233,7 +229,6 @@ public class Jeu extends Observable implements Runnable{
                     System.out.println("Valeur bonus: "+SuperMode);
                 }
                 else if (CheckMort(ent)){
-                    System.out.println("MORT ! MORT ! MORT ! IDIOT");
                     this.gameover= true;
                     setChanged();
                     notifyObservers();
@@ -250,7 +245,6 @@ public class Jeu extends Observable implements Runnable{
                 notifyObservers();
                 
                 for(int i=1;i<getGrille().GetListE().size();i++){
-                    System.out.println("Fantôme num: "+i);
                     Entity Ghost=getGrille().getEntity(i);
                         Ghost.DepAlea(ent.getX(),ent.getY());
                         Ghost.depl(Ghost.currentDir);

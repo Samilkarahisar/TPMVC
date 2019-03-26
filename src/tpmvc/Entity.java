@@ -63,7 +63,6 @@ public class Entity {
                 if(y+1<grid.getWIDTH()){
                     if(temp[x][y+1]){
                         this.y++;
-                        System.out.println(x+' '+y);
                         return true;
                     }
                 }
@@ -72,7 +71,6 @@ public class Entity {
                 if(y-1>=0){
                     if(temp[x][y-1]){
                         this.y--;
-                        System.out.println(x+' '+y);
                         return true;
                         
                     }

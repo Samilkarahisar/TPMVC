@@ -101,14 +101,12 @@ public class Graphique extends Application{
             @Override
             public void update(Observable o, Object arg) {
                 if(game.gameover){
-                    System.out.println("CA AFFICHE ??");
                     t_gameover.setVisible(true);
                 }
                 else{
                     t_gameover.setVisible(false);
                 }
                 if(game.gagne){
-                    System.out.println("CA AFFICHE ??");
                     t_win.setVisible(true);
                 }
                 else{
@@ -231,7 +229,6 @@ public class Graphique extends Application{
                         game.gameover=false;
                         game.gagne=false;
                         game.resetPointcompteur();
-                        System.out.println("JEU DE SES MORTS");
                         game.InitGomme();
                     break;
                     default:

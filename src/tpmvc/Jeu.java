@@ -143,7 +143,7 @@ public class Jeu extends Observable implements Runnable{
                     ent.y=3;
                     this.restart=false;
                 }
-                Thread.sleep(600);
+                Thread.sleep(700);
                 if(ent.currentDir!=null){
                 ent.depl(ent.currentDir);
                 }

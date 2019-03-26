@@ -5,10 +5,6 @@
  */
 package tpmvc;
 
-/**
- *
- * @author martin
- */
 public enum Dir {
     droite,gauche,haut,bas
 }

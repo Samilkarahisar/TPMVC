@@ -6,10 +6,7 @@
 package tpmvc;
 import static java.lang.Thread.*;
 
-/**
- *
- * @author martin
- */
+
 public class main {
     
 }

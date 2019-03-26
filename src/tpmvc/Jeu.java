@@ -109,7 +109,7 @@ public class Jeu extends Observable implements Runnable{
         for(int l=0;l<ListBonus.size();l++){
             SuperGomme current=ListBonus.get(l);
             if(ent.x==current.x&&ent.y==current.y){
-                SuperMode+=50;
+                SuperMode+=150;
                 ListBonus.remove(l);
             }
     }
@@ -211,7 +211,7 @@ public class Jeu extends Observable implements Runnable{
                     this.restart=false;
                     this.gameover=false;
                 }
-                Thread.sleep(700);
+                Thread.sleep(200);
                 if(ent.currentDir!=null){
                     ent.depl(ent.currentDir);
                 }

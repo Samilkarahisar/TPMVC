@@ -15,6 +15,7 @@ public class Jeu extends Observable implements Runnable{
     private final int LENGHT = 10;
     private int pointcompteur=0;
     public boolean restart;
+    public boolean gameover;
 
     Boolean GrillePoints[][]={
             {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
@@ -52,6 +53,7 @@ public class Jeu extends Observable implements Runnable{
             Entity current=getGrille().getEntity(i);
             if(current.getX()==ent.getX()&&current.getY()==ent.getY()){
                 res=true;
+                gameover=true;
                 System.out.println("Le Fantôme "+i+"  vous a dévoré !!");
             }
         }
@@ -68,7 +70,6 @@ public class Jeu extends Observable implements Runnable{
 
     }
 
-
     public void start(){
     new Thread(this).start();
     }
@@ -77,6 +78,12 @@ public class Jeu extends Observable implements Runnable{
 
     public Grille getGrille() {
         return grille;
+    }
+    public int getPointcompteur(){
+        return pointcompteur;
+    }
+    public void resetPointcompteur(){
+        pointcompteur=0;
     }
 
     public int getWIDTH() {
@@ -93,6 +100,7 @@ public class Jeu extends Observable implements Runnable{
     public void run(){
         boolean end;
         boolean restart=false;
+
         try{
             getGrille().getNewE(7,7);
             Fantôme ghost1 = new Fantôme(9,9, getGrille());
@@ -110,10 +118,15 @@ public class Jeu extends Observable implements Runnable{
             
             setChanged();
             notifyObservers();
+
             try{
+
                 if (CheckMort(ent)){
                     System.out.println("MORT ! MORT ! MORT ! IDIOT");
+
+
                     while(!this.restart){
+
                         Thread.sleep(100);
                     }
                     ent.x=3;
@@ -126,12 +139,14 @@ public class Jeu extends Observable implements Runnable{
                 }
 
                 CheckPoint(ent);
+
                 Thread.sleep(5);
                 setChanged();
                 notifyObservers();
                 System.out.println("Votre score: " + pointcompteur);
                 if (CheckMort(ent)){
                     System.out.println("MORT ! MORT ! MORT ! IDIOT");
+
                     while(!this.restart){
                         Thread.sleep(100);
                     }

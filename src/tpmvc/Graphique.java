@@ -10,6 +10,7 @@ import java.util.Observer;
 import javafx.application.Application;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.effect.Blend;
 import javafx.scene.effect.DropShadow;
@@ -57,7 +58,16 @@ public class Graphique extends Application{
      Image imYem = new Image("superGomme.png");
 
      Image imGhost = new Image("ghost.png");
-        
+
+     Text t = new Text();
+     t.setFont(Font.font ("Verdana", 30));
+     t.setFill(Color.WHITE);
+
+
+     Text t_gameover = new Text();
+     t_gameover.setFont(Font.font ("Verdana", 30));
+     t_gameover.setFill(Color.WHITE);
+
     
     ImageView[][] tab = new ImageView[SIZE_X][SIZE_Y];
    
@@ -79,6 +89,12 @@ public class Graphique extends Application{
         Observer o =  new Observer() { // l'observer observe l'obervable (update est exécuté dès notifyObservers() est appelé côté modèle )
             @Override
             public void update(Observable o, Object arg) {
+                if(game.gameover==true){
+                t_gameover.setText("Game over. Appuyer sur Entree, pour recommencer.");
+
+                }
+                t.setText("Score:" + game.getPointcompteur());
+
                 for (int i = 0; i < SIZE_X; i++) { // rafraichissement graphique
                     for (int j = 0; j < SIZE_Y; j++) {
                         try{
@@ -127,10 +143,16 @@ public class Graphique extends Application{
         game.start();
         StackPane root = new StackPane();
         root.getChildren().add(gPane);
+        root.getChildren().add(t);
+        root.getChildren().add(t_gameover);
+
+
+        StackPane.setAlignment(t_gameover,Pos.CENTER);
+        StackPane.setAlignment(t, Pos.BOTTOM_LEFT);
         gPane.setGridLinesVisible(true);
 
         
-    Scene scene = new Scene(root,300,250);
+    Scene scene = new Scene(root,900,700);
     
           
     primaryStage.setTitle("PACMAN");
@@ -157,6 +179,8 @@ public class Graphique extends Application{
                     break;
                     case ENTER:
                         game.restart=true;
+                        game.gameover=false;
+                        game.resetPointcompteur();
                         System.out.println("JEU DE SES MORTS");
                     break;
                     default:

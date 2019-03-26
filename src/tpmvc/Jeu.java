@@ -19,29 +19,31 @@ public class Jeu extends Observable implements Runnable{
     public boolean gameover=false;
     public ArrayList<SuperGomme> ListBonus;
     public int SuperMode;
-
+    public int MaxPoint;
+    public boolean gagne;
+    
      private static final Boolean Map[][]={
             {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false},
-            {false,true,true,true,true,true,false,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
-            {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,true,true,true,false,true,false},
-            {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,false,false,true,false,true,false},
-            {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,true,false},
-            {false,true,false,true,false,false,false,false,false,true,false,false,false,true,false,true,false,false,false,true,false},
-            {false,true,false,true,true,true,false,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
-            {false,true,false,true,false,true,false,true,false,false,false,true,false,true,false,true,false,true,false,true,false},
-            {false,true,true,true,false,true,true,true,true,true,false,true,false,true,true,true,false,true,true,true,false},
-            {false,false,false,true,false,false,false,true,true,true,false,true,false,false,false,true,false,false,false,true,false},
-            {false,true,true,true,false,true,true,true,true,true,false,true,false,true,true,true,false,true,true,true,false},
-            {false,true,false,true,false,true,false,true,false,false,false,true,false,true,false,true,false,true,false,true,false},
-            {false,true,false,true,true,true,false,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
-            {false,true,false,true,false,false,false,false,false,true,false,false,false,true,false,true,false,false,false,true,false},
-            {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,true,false},
-            {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,false,false,true,false,true,false},
-            {false,true,false,true,false,true,false,false,false,true,false,false,false,true,false,true,true,true,false,true,false},
-            {false,true,true,true,true,true,false,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
-            {false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false}
+         {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
+         {false,true,true,true,true,true,false,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
+         {false,true,false,true,false,true,true,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
+         {false,true,false,true,false,true,false,true,false,true,false,true,false,true,false,false,false,true,false,true,false},
+         {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,true,false},
+         {false,true,false,true,false,false,false,false,false,true,false,false,false,true,false,true,false,false,false,true,false},
+         {false,true,false,true,true,true,false,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
+         {false,true,false,true,false,true,false,true,false,false,false,true,false,true,false,true,false,true,false,true,false},
+         {false,true,true,true,false,true,true,true,true,true,false,true,false,true,true,true,false,true,true,true,false},
+         {false,false,false,true,false,false,false,true,true,true,false,true,false,false,false,true,false,false,false,true,false},
+         {false,true,true,true,false,true,true,true,true,true,false,true,false,true,true,true,false,true,true,true,false},
+         {false,true,false,true,false,true,false,true,false,false,false,true,false,true,false,true,false,true,false,true,false},
+         {false,true,false,true,true,true,false,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
+         {false,true,false,true,false,false,false,false,false,true,false,false,false,true,false,true,false,false,false,true,false},
+         {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,true,false},
+         {false,true,false,true,false,true,false,true,false,true,false,true,false,true,false,false,false,true,false,true,false},
+         {false,true,false,true,false,true,true,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
+         {false,true,true,true,true,true,false,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
+         {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
+         {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false}
     };
 
     private Boolean GrillePoints[][];
@@ -65,6 +67,7 @@ public class Jeu extends Observable implements Runnable{
         GrillePoints=Map.clone();
         ListBonus=new ArrayList<SuperGomme>();
         InitGomme();
+        startPointCompteur();
     }
 
 
@@ -107,6 +110,7 @@ public class Jeu extends Observable implements Runnable{
             SuperGomme current=ListBonus.get(l);
             if(ent.x==current.x&&ent.y==current.y){
                 SuperMode+=50;
+                ListBonus.remove(l);
             }
     }
     }
@@ -114,7 +118,8 @@ public class Jeu extends Observable implements Runnable{
     public void start(){
     new Thread(this).start();
     }
-
+    
+       
     public Boolean[][] getPoints(){return GrillePoints;}
 
     public Grille getGrille() {
@@ -123,6 +128,18 @@ public class Jeu extends Observable implements Runnable{
     public int getPointcompteur(){
         return pointcompteur;
     }
+    
+    public void startPointCompteur(){
+        MaxPoint=0;
+        for(int i=0;i<21;i++){
+            for(int j=0;j<21;j++){
+                if(GrillePoints[i][j]){
+                    MaxPoint++;
+                }
+            }
+        }
+    }
+    
     public boolean getGameover(Entity ent){
         return CheckMort(ent);
     }
@@ -152,9 +169,9 @@ public class Jeu extends Observable implements Runnable{
         boolean end;
         boolean restart=false;
         try{
-            getGrille().getNewE(7,7);
-            Fantôme ghost1 = new Fantôme(9,9, getGrille());
-            Fantôme ghost2 = new Fantôme(11,7, getGrille());
+            getGrille().getNewE(10,11);
+            Fantôme ghost1 = new Fantôme(11,9, getGrille());
+            Fantôme ghost2 = new Fantôme(12,9, getGrille());
             getGrille().GetListE().add(ghost1);
             getGrille().GetListE().add(ghost2);
             System.out.println(ghost2.getX()+" "+ghost2.getY()+"       "+getGrille().GetListE().size());
@@ -170,7 +187,15 @@ public class Jeu extends Observable implements Runnable{
             notifyObservers();
 
             try{
-
+                CheckPoint(ent);
+                if(pointcompteur==MaxPoint){
+                    this.gagne=true;
+                    setChanged();
+                    notifyObservers();
+                    while(this.gagne){
+                        Thread.sleep(20);
+                    }
+                }
                 CheckGomme(ent);
                 if(SuperMode>0){
                     CheckFantôme(ent);
@@ -179,43 +204,51 @@ public class Jeu extends Observable implements Runnable{
                 else    if (CheckMort(ent)){
                     System.out.println("MORT ! MORT ! MORT ! IDIOT");
 
-                    this.gameover= getGameover(ent);
+                    this.gameover= true;
+                    setChanged();
+                    notifyObservers();
                     while(!this.restart){
                         Thread.sleep(100);
                     }
-                    ent.x=3;
-                    ent.y=3;
+                    ent.x=10;
+                    ent.y=11;
                     this.restart=false;
+                    this.gameover=false;
                 }
                 Thread.sleep(700);
                 if(ent.currentDir!=null){
                     ent.depl(ent.currentDir);
                 }
 
-                CheckPoint(ent);
                 
                 Thread.sleep(5);
                 setChanged();
                 notifyObservers();
                 System.out.println("Votre score: " + pointcompteur);
+                
                 CheckGomme(ent);
                 if(SuperMode>0){
                     CheckFantôme(ent);
                     SuperMode--;
+                    System.out.println("Valeur bonus: "+SuperMode);
                 }
                 else if (CheckMort(ent)){
                     System.out.println("MORT ! MORT ! MORT ! IDIOT");
-
+                    this.gameover= true;
+                    setChanged();
+                    notifyObservers();
                     while(!this.restart){
 
                         Thread.sleep(100);
                     }
-                    ent.x=3;
-                    ent.y=3;
+                    ent.x=10;
+                    ent.y=11;
                     this.restart=false;
+                    this.gameover=false;
                 }
                 setChanged();
                 notifyObservers();
+                
                 for(int i=1;i<getGrille().GetListE().size();i++){
                     System.out.println("Fantôme num: "+i);
                     Entity Ghost=getGrille().getEntity(i);

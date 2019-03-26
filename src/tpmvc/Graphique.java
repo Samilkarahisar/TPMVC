@@ -67,6 +67,13 @@ public class Graphique extends Application{
 
 
      t_gameover.setText("Game over. Appuyer sur Entree, pour recommencer.");
+     
+     Text t_win = new Text();
+     t_win.setFont(Font.font ("Verdana", 30));
+     t_win.setFill(Color.WHITE);
+
+
+     t_win.setText("Vous avez Gagné ! Appuyer sur Entree, pour recommencer.");
 
     ImageView[][] tab = new ImageView[SIZE_X][SIZE_Y];
    
@@ -89,10 +96,18 @@ public class Graphique extends Application{
             @Override
             public void update(Observable o, Object arg) {
                 if(game.gameover){
+                    System.out.println("CA AFFICHE ??");
                     t_gameover.setVisible(true);
                 }
                 else{
                     t_gameover.setVisible(false);
+                }
+                if(game.gagne){
+                    System.out.println("CA AFFICHE ??");
+                    t_win.setVisible(true);
+                }
+                else{
+                    t_win.setVisible(false);
                 }
                 t.setText("Score:" + game.getPointcompteur());
 
@@ -155,9 +170,11 @@ public class Graphique extends Application{
         root.getChildren().add(gPane);
         root.getChildren().add(t);
         root.getChildren().add(t_gameover);
+        root.getChildren().add(t_win);
 
 
         StackPane.setAlignment(t_gameover,Pos.CENTER);
+        StackPane.setAlignment(t_win,Pos.CENTER);
         StackPane.setAlignment(t, Pos.BOTTOM_LEFT);
         gPane.setGridLinesVisible(true);
 
@@ -190,8 +207,10 @@ public class Graphique extends Application{
                     case ENTER:
                         game.restart=true;
                         game.gameover=false;
+                        game.gagne=false;
                         game.resetPointcompteur();
                         System.out.println("JEU DE SES MORTS");
+                        game.InitGomme();
                     break;
                     default:
                     break;

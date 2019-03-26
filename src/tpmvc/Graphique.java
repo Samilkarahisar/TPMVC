@@ -29,10 +29,7 @@ import javafx.stage.Stage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-/**
- *
- * @author martin
- */
+
 public class Graphique extends Application{
     //modèle ( le jeu qui s'execute)
 
@@ -54,9 +51,9 @@ public class Graphique extends Application{
     Image imPM = new Image("pacman.png"); // préparation des images
     Image imVide = new Image("Vide.png");
     Image imMur = new Image("mur.png");
-
-     Image imYem = new Image("superGomme.png");
-
+    Image imBonus=new Image("Bonus.png");
+     Image imYem = new Image("gomme.png");
+     Image imGhostScared= new Image("ghost_chased.png");
      Image imGhost = new Image("ghost.png");
 
      Text t = new Text();
@@ -105,6 +102,12 @@ public class Graphique extends Application{
                             if(game.getGrille().getGrille()[i][j]){
                                 if(game.getPoints()[i][j]){
                                     tab[i][j].setImage(imYem);
+                                    for(int l=0;l<game.ListBonus.size();l++){
+                                        SuperGomme current=game.ListBonus.get(l);
+                                        if(i==current.x&&j==current.y){
+                                            tab[i][j].setImage(imBonus);
+                                        }
+                                    }
                                 }
                                 else {
                                     tab[i][j].setImage(imVide);
@@ -125,7 +128,10 @@ public class Graphique extends Application{
                          
                              if (game.getGrille().getEntity(k).getX() == i && game.getGrille().getEntity(k).getY() == j) { // spm est à la position i, j => le dessiner
 
-                                 tab[i][j].setImage(imGhost);
+                                if(game.SuperMode>0){
+                                    tab[i][j].setImage(imGhostScared);
+                                }
+                                else tab[i][j].setImage(imGhost);
 
                              }
 
@@ -203,3 +209,4 @@ public class Graphique extends Application{
    
    
 }
+

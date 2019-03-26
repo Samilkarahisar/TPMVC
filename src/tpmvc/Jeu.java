@@ -6,6 +6,7 @@
 package tpmvc;
 
 import static java.lang.Thread.*;
+import java.util.ArrayList;
 import java.util.Observable;
 
 
@@ -16,7 +17,8 @@ public class Jeu extends Observable implements Runnable{
     private int pointcompteur=0;
     public boolean restart;
     public boolean gameover=false;
-
+    public ArrayList<SuperGomme> ListBonus;
+    public int SuperMode;
 
      private static final Boolean Map[][]={
             {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
@@ -43,10 +45,26 @@ public class Jeu extends Observable implements Runnable{
     };
 
     private Boolean GrillePoints[][];
-
+    
+    
+    
+    void InitGomme(){
+        ListBonus=new ArrayList<SuperGomme>();
+        SuperGomme gomme1= new SuperGomme();
+        ListBonus.add(gomme1);
+        SuperGomme gomme2= new SuperGomme(18,18);
+        ListBonus.add(gomme2);
+        SuperGomme gomme3= new SuperGomme(3,18);
+        ListBonus.add(gomme3);
+        SuperGomme gomme4= new SuperGomme(18,3);
+        ListBonus.add(gomme4);
+    }
+    
     public Jeu(){
         grille = new Grille();
         GrillePoints=Map.clone();
+        ListBonus=new ArrayList<SuperGomme>();
+        InitGomme();
     }
 
 
@@ -71,7 +89,28 @@ public class Jeu extends Observable implements Runnable{
         }
 
     }
-
+    
+    public void CheckFantôme(Entity ent){
+        int x=ent.x;
+        int y=ent.y;
+        for(int i = 1; i<this.grille.GetListE().size();i++){
+                if(grille.getEntity(i).x==x&&grille.getEntity(i).y==y){
+                    grille.getEntity(i).x=10;
+                    grille.getEntity(i).y=10;
+                    System.out.println("ON MANGE LE FANTOME "+i);
+                }
+        }   
+    }
+    
+    public void CheckGomme(Entity ent){
+        for(int l=0;l<ListBonus.size();l++){
+            SuperGomme current=ListBonus.get(l);
+            if(ent.x==current.x&&ent.y==current.y){
+                SuperMode+=50;
+            }
+    }
+    }
+    
     public void start(){
     new Thread(this).start();
     }
@@ -132,10 +171,15 @@ public class Jeu extends Observable implements Runnable{
 
             try{
 
-                if (CheckMort(ent)){
+                CheckGomme(ent);
+                if(SuperMode>0){
+                    CheckFantôme(ent);
+                    SuperMode--;
+                }
+                else    if (CheckMort(ent)){
                     System.out.println("MORT ! MORT ! MORT ! IDIOT");
 
-
+                    this.gameover= getGameover(ent);
                     while(!this.restart){
                         Thread.sleep(100);
                     }
@@ -145,16 +189,21 @@ public class Jeu extends Observable implements Runnable{
                 }
                 Thread.sleep(700);
                 if(ent.currentDir!=null){
-                ent.depl(ent.currentDir);
+                    ent.depl(ent.currentDir);
                 }
 
                 CheckPoint(ent);
-                this.gameover= getGameover(ent);
-                        Thread.sleep(5);
+                
+                Thread.sleep(5);
                 setChanged();
                 notifyObservers();
                 System.out.println("Votre score: " + pointcompteur);
-                if (CheckMort(ent)){
+                CheckGomme(ent);
+                if(SuperMode>0){
+                    CheckFantôme(ent);
+                    SuperMode--;
+                }
+                else if (CheckMort(ent)){
                     System.out.println("MORT ! MORT ! MORT ! IDIOT");
 
                     while(!this.restart){
@@ -165,6 +214,8 @@ public class Jeu extends Observable implements Runnable{
                     ent.y=3;
                     this.restart=false;
                 }
+                setChanged();
+                notifyObservers();
                 for(int i=1;i<getGrille().GetListE().size();i++){
                     System.out.println("Fantôme num: "+i);
                     Entity Ghost=getGrille().getEntity(i);

@@ -23,7 +23,7 @@ public class Jeu extends Observable implements Runnable{
     public boolean gagne;
     
      private static final Boolean Map[][]={
-            {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
+             {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
          {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
          {false,true,true,true,true,true,false,true,false,true,false,true,false,true,true,true,false,true,true,true,false},
          {false,true,false,true,false,true,true,true,true,true,true,true,true,true,false,true,true,true,false,true,false},
@@ -171,9 +171,21 @@ public class Jeu extends Observable implements Runnable{
         try{
             getGrille().getNewE(10,11);
             Fantôme ghost1 = new Fantôme(11,9, getGrille());
-            Fantôme ghost2 = new Fantôme(12,9, getGrille());
+            Fantôme ghost2 = new Fantôme(11,9, getGrille());
+            Fantôme ghost3 = new Fantôme(11,9, getGrille());
+            Fantôme ghost4 = new Fantôme(11,9, getGrille());
             getGrille().GetListE().add(ghost1);
             getGrille().GetListE().add(ghost2);
+            getGrille().GetListE().add(ghost3);
+            getGrille().GetListE().add(ghost4);
+            Fantôme ghost5 = new Fantôme(11,9, getGrille());
+            Fantôme ghost6 = new Fantôme(11,9, getGrille());
+            Fantôme ghost7 = new Fantôme(11,9, getGrille());
+            Fantôme ghost8 = new Fantôme(11,9, getGrille());
+            getGrille().GetListE().add(ghost5);
+            getGrille().GetListE().add(ghost6);
+            getGrille().GetListE().add(ghost7);
+            getGrille().GetListE().add(ghost8);
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -199,7 +211,7 @@ public class Jeu extends Observable implements Runnable{
                     CheckFantôme(ent);
                     SuperMode--;
                 }
-                else    if (CheckMort(ent)){
+                else if (CheckMort(ent)){
                     this.gameover= true;
                     setChanged();
                     notifyObservers();

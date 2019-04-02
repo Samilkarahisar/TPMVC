@@ -199,7 +199,7 @@ public class Graphique extends Application{
         gPane.setGridLinesVisible(true);
 
         
-    Scene scene = new Scene(root,900,700);
+    Scene scene = new Scene(root,840,840);
     
           
     primaryStage.setTitle("PACMAN");
